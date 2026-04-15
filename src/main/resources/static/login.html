@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediML - Acceso al Sistema</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans h-screen flex">
+
+    <div class="hidden lg:flex lg:w-1/2 bg-slate-900 text-white flex-col justify-center items-center p-12 relative overflow-hidden z-0">
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+            <i class="fa-solid fa-network-wired text-9xl absolute top-10 left-10"></i>
+            <i class="fa-solid fa-brain text-9xl absolute bottom-10 right-10"></i>
+        </div>
+        
+        <div class="z-10 text-center">
+            <div class="flex items-center justify-center font-bold text-5xl tracking-wider mb-6">
+                <i class="fa-solid fa-heart-pulse text-rose-500 mr-4"></i> Medi<span class="text-blue-500">ML</span>
+            </div>
+            <h1 class="text-2xl font-medium text-slate-300 mb-4 border-b border-slate-700 pb-4 inline-block">Plataforma de Salud Predictiva</h1>
+            <p class="text-slate-400 max-w-md mx-auto mt-4 text-sm leading-relaxed">
+                Acceso restringido al personal médico autorizado. Todo acceso y predicción generada está protegida bajo estándares de confidencialidad médica.
+            </p>
+        </div>
+    </div>
+
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white relative z-10 shadow-2xl">
+        <div class="w-full max-w-md">
+            
+            <div class="mb-10 text-center lg:text-left">
+                <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Iniciar Sesión</h2>
+                <p class="text-slate-500 text-sm mt-2">Ingresa tus credenciales institucionales</p>
+            </div>
+
+            <div id="error-message" class="hidden mb-6 bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg flex items-center shadow-sm">
+                <i class="fa-solid fa-circle-exclamation text-rose-500 mr-3 text-lg"></i>
+                <p class="text-sm text-rose-700 font-medium">Credenciales incorrectas o usuario no autorizado.</p>
+            </div>
+
+            <form id="loginForm" class="space-y-6">
+                
+                <div>
+                    <label for="email" class="block text-sm font-semibold text-slate-700 mb-1">Correo Electrónico</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-regular fa-envelope text-slate-400"></i>
+                        </div>
+                        <input type="email" id="email" class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-slate-700 bg-gray-50 focus:bg-white" placeholder="ejemplo@gmail.com" required>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <label for="password" class="block text-sm font-semibold text-slate-700">Contraseña</label>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-lock text-slate-400"></i>
+                        </div>
+                        <input type="password" id="password" class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-slate-700 bg-gray-50 focus:bg-white" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full flex justify-center items-center py-3 px-4 rounded-lg shadow-lg shadow-blue-600/30 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all">
+                    Entrar al Panel <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </form>
+
+            <div class="mt-8 text-center">
+                <p class="text-xs text-slate-400">&copy; 2024 Clínica IA. Todos los derechos reservados.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            // Evitamos que la página se recargue por defecto
+            event.preventDefault();
+            
+            // Obtenemos los valores ingresados
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Definimos los usuarios válidos según lo solicitado
+            const validUsers = [
+                'beltran@gmail.com', 
+                'guerra@gmail.com', 
+                'lopez@gmail.com'
+            ];
+
+            // Validamos
+            if (validUsers.includes(email) && password === '1234') {
+                // Si es correcto, ocultamos error (por si estaba visible) y redirigimos
+                errorMessage.classList.add('hidden');
+                
+                // Opcional: Podríamos guardar el nombre en localStorage para mostrarlo en el dashboard
+                let username = email.split('@')[0];
+                username = username.charAt(0).toUpperCase() + username.slice(1);
+                localStorage.setItem('loggedUser', username);
+
+                // Redirección al dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                // Si falla, mostramos el mensaje de error
+                errorMessage.classList.remove('hidden');
+                // Efecto de vibración opcional en el formulario para indicar error
+                const formBody = document.querySelector('form');
+                formBody.classList.add('animate-pulse');
+                setTimeout(() => formBody.classList.remove('animate-pulse'), 500);
+            }
+        });
+    </script>
+</body>
+</html>

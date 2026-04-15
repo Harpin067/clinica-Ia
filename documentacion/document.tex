@@ -1,0 +1,274 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{caption}
+
+% Configuración de márgenes
+\geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=3cm}
+
+% Información del documento
+\title{Primer Avance del Proyecto: Sistema de Gestión de Citas Médicas con Análisis Predictivo}
+\author{Brian Steven Beltrán Reina \\ Edwin Geovanni Guerra Cruz \\ Edgar Alessandro López Martinez}
+\date{\today}
+
+\begin{document}
+	
+	% -----------------------------------------------------------------------------------
+	% PORTADA
+	% -----------------------------------------------------------------------------------
+	\begin{titlepage}
+		\centering
+		% Logo de la Universidad (Asegúrate de tener un archivo llamado logo.png)
+		\includegraphics[width=0.3\textwidth]{logo.png} \par\vspace{1cm}
+		
+		{\scshape\LARGE Universidad Católica de El Salvador \par}
+		\vspace{0.5cm}
+		{\scshape\Large Facultad de Ingeniería y Arquitectura \par}
+		\vspace{0.5cm}
+		{\scshape\Large Ingeniería en Desarrollo de Software \par}
+		\vspace{1.5cm}
+		
+		{\huge\bfseries Sistema de Gestión de Citas Médicas para Clínica \par}
+		\vspace{0.5cm}
+		{\large Primer Avance (20\%) \par}
+		\vspace{1.5cm}
+		
+		\textbf{Cátedra:} \\
+		Programación de Base de Datos \par
+		\vspace{0.5cm}
+		
+		\textbf{Catedrático:} \\
+		Ing. José Ernesto Erazo Linares \par
+		\vspace{1cm}
+		
+		\textbf{Integrantes:} \\
+		Brian Steven Beltrán Reina \\
+		Edwin Geovanni Guerra Cruz \\
+		Edgar Alessandro López Martinez \par
+		\vspace{2cm}
+		
+		{\large \today \par}
+	\end{titlepage}
+	
+	% -----------------------------------------------------------------------------------
+	% ÍNDICE
+	% -----------------------------------------------------------------------------------
+	\tableofcontents
+	\newpage
+	
+	% -----------------------------------------------------------------------------------
+	% 1. ALCANCE DEL PROYECTO
+	% -----------------------------------------------------------------------------------
+	\section{Alcance del Proyecto a Realizar}
+	
+	El proyecto consiste en el desarrollo de una plataforma web integral para la gestión clínica, diseñada para optimizar el flujo de trabajo operativo y potenciar la toma de decisiones mediante inteligencia artificial.
+	
+	\subsection{Funcionalidades Principales}
+	El sistema abarcará los siguientes módulos funcionales:
+	\begin{itemize}
+		\item \textbf{Gestión de Usuarios y Roles:} Administración de perfiles para doctores, pacientes y personal administrativo.
+		\item \textbf{Gestión de Citas Médicas:} Programación, reprogramación y cancelación de citas, permitiendo visualizar la disponibilidad de los doctores en tiempo real.
+		\item \textbf{Expediente Clínico Electrónico:} Registro de consultas, signos vitales (peso, talla, presión arterial), diagnósticos (CIE-10) y recetas médicas.
+		\item \textbf{Farmacia e Inventario:} Control de stock de medicamentos, alertas de stock mínimo y vinculación directa con las recetas emitidas.
+		\item \textbf{Módulo de Inteligencia Artificial (Analytics):} Integración con un microservicio en Python para analizar datos históricos y generar predicciones sobre ausentismo de pacientes y riesgos de salud basados en signos vitales.
+	\end{itemize}
+	
+	\subsection{Problemática que Resuelve}
+	Actualmente, muchas clínicas enfrentan problemas como la pérdida de expedientes físicos, la ineficiencia en la gestión de inventarios y una alta tasa de ausentismo en las citas ("No-Show"). 
+	
+	Nuestra base de datos y sistema resuelven esto centralizando la información, garantizando la integridad de los datos médicos y proporcionando herramientas predictivas que permiten a la clínica tomar medidas preventivas (ej. recordatorios personalizados) para reducir pérdidas económicas y mejorar la atención al paciente.
+	
+	% -----------------------------------------------------------------------------------
+	% 2. VIABILIDAD DEL PROYECTO
+	% -----------------------------------------------------------------------------------
+	\section{Viabilidad del Proyecto}
+	
+	\subsection{Viabilidad Técnica}
+	El proyecto es altamente viable tecnológicamente debido al uso de un stack moderno y robusto:
+	\begin{itemize}
+		\item \textbf{Backend:} Java con Spring Boot, estándar en la industria para sistemas empresariales seguros y escalables.
+		\item \textbf{Base de Datos:} PostgreSQL, un motor relacional potente capaz de manejar transacciones complejas y grandes volúmenes de datos.
+		\item \textbf{Machine Learning:} Python (Pandas, Scikit-learn), líder indiscutible en ciencia de datos.
+		\item \textbf{Infraestructura:} Uso de Docker para la contenerización, asegurando que el despliegue sea consistente en cualquier entorno.
+	\end{itemize}
+	
+	\subsection{Impacto en el Entorno Informático}
+	\textbf{Positivo:} La adopción de una arquitectura de microservicios (separando la lógica de negocio en Java y el análisis en Python) fomenta la mantenibilidad y escalabilidad. Además, el uso de estándares abiertos reduce la dependencia de licencias costosas.
+	
+	\textbf{Negativo/Riesgos:} La curva de aprendizaje para integrar dos stacks diferentes (Java y Python) y la gestión de la infraestructura en contenedores requiere un nivel técnico avanzado, lo cual se mitiga con una buena documentación y prácticas DevOps.
+	
+	% -----------------------------------------------------------------------------------
+	% 3. DIAGRAMAS DE ARQUITECTURA DE SOFTWARE
+	% -----------------------------------------------------------------------------------
+	\section{Diagramas de Arquitectura de Software}
+	
+	En esta sección se detallan los diagramas que modelan el comportamiento y la estructura del sistema.
+	
+	\subsection{Diagrama de Casos de Uso}
+	Muestra las interacciones entre los actores (Paciente, Doctor, Admin) y el sistema.
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.8\textwidth]{casos_uso.png} 
+		\fbox{\begin{minipage}{10cm}\centering\vspace{3cm} [INSERTAR DIAGRAMA DE CASOS DE USO AQUÍ] \vspace{3cm}\end{minipage}}
+		\caption{Diagrama de Casos de Uso General}
+	\end{figure}
+	
+	\subsection{Diagrama de Actividades}
+	Flujo del proceso principal: Agendamiento y realización de una consulta médica.
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.8\textwidth]{diagrama_actividades.png}
+		\fbox{\begin{minipage}{10cm}\centering\vspace{3cm} [INSERTAR DIAGRAMA DE ACTIVIDADES AQUÍ] \vspace{3cm}\end{minipage}}
+		\caption{Diagrama de Actividades: Proceso de Cita Médica}
+	\end{figure}
+	
+	\subsection{Diagramas de Contexto (DFD)}
+	
+	\subsubsection{Diagrama de Contexto (Nivel 0)}
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.8\textwidth]{dfd_nivel_0.png}
+		\fbox{\begin{minipage}{10cm}\centering\vspace{3cm} [INSERTAR DFD NIVEL 0 AQUÍ] \vspace{3cm}\end{minipage}}
+		\caption{Diagrama de Flujo de Datos - Nivel 0}
+	\end{figure}
+	
+	\subsubsection{Diagrama de Nivel 1}
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.8\textwidth]{dfd_nivel_1.png}
+		\fbox{\begin{minipage}{10cm}\centering\vspace{3cm} [INSERTAR DFD NIVEL 1 AQUÍ] \vspace{3cm}\end{minipage}}
+		\caption{Diagrama de Flujo de Datos - Nivel 1}
+	\end{figure}
+	
+	\subsubsection{Diagrama de Nivel 2}
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.8\textwidth]{dfd_nivel_2.png}
+		\fbox{\begin{minipage}{10cm}\centering\vspace{3cm} [INSERTAR DFD NIVEL 2 AQUÍ] \vspace{3cm}\end{minipage}}
+		\caption{Diagrama de Flujo de Datos - Nivel 2 (Proceso Específico)}
+	\end{figure}
+	
+	\subsection{Arquitectura de la Aplicación}
+	Arquitectura híbrida mostrando la comunicación entre Spring Boot, el contenedor de PostgreSQL y el servicio de Machine Learning en Python.
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.8\textwidth]{arquitectura.png}
+		\fbox{\begin{minipage}{10cm}\centering\vspace{3cm} [INSERTAR DIAGRAMA DE ARQUITECTURA DOCKER AQUÍ] \vspace{3cm}\end{minipage}}
+		\caption{Arquitectura de Microservicios y Contenedores}
+	\end{figure}
+	
+	\subsection{Primer Diagrama Entidad-Relación (DER)}
+	Modelo lógico de la base de datos PostgreSQL, incluyendo tablas clave como Pacientes, Doctores, Citas y Predicciones.
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.9\textwidth]{der.png}
+		\fbox{\begin{minipage}{12cm}\centering\vspace{5cm} [INSERTAR IMAGEN DEL DER OBTENIDO DE DBEAVER] \vspace{5cm}\end{minipage}}
+		\caption{Diagrama Entidad-Relación (Generado desde PostgreSQL)}
+	\end{figure}
+	
+	% -----------------------------------------------------------------------------------
+	% 4. ESTIMACIÓN Y COSTOS (COCOMO)
+	% -----------------------------------------------------------------------------------
+	\section{Estimación y Costos (Método COCOMO)}
+	
+	Para la estimación de costos y esfuerzo se ha utilizado el modelo \textbf{COCOMO Básico} en modo \textit{Orgánico}, dado que el equipo es pequeño y tiene experiencia relativa con el entorno de desarrollo.
+	
+	\textbf{Variables del modelo:}
+	\begin{itemize}
+		\item KLOC (Miles de líneas de código estimadas): 4.5 KLOC
+		\item $a = 2.4$, $b = 1.05$ (Coeficientes para modo Orgánico)
+		\item $c = 2.5$, $d = 0.38$
+		\item Salario promedio mensual desarrollador: \$800.00 USD
+	\end{itemize}
+	
+	\textbf{Cálculo de Esfuerzo (Personas-Mes):}
+	\[ E = a \times (KLOC)^b = 2.4 \times (4.5)^{1.05} \approx 11.64 \text{ Personas-Mes} \]
+	
+	\textbf{Cálculo de Tiempo de Desarrollo (Meses):}
+	\[ T = c \times (E)^d = 2.5 \times (11.64)^{0.38} \approx 6.35 \text{ Meses} \]
+	
+	\textbf{Estimación de Costo Total:}
+	\[ Costo = E \times \text{Salario Promedio} = 11.64 \times \$800 = \$9,312.00 \text{ USD} \]
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{ll}
+			\toprule
+			\textbf{Métrica} & \textbf{Valor Estimado} \\
+			\midrule
+			Líneas de Código (KLOC) & 4.5 \\
+			Esfuerzo (Personas-Mes) & 11.64 \\
+			Tiempo de Desarrollo & 6.35 Meses \\
+			Personal Recomendado & 2 personas (aprox) \\
+			\textbf{Costo Total del Software} & \textbf{\$9,312.00 USD} \\
+			\bottomrule
+		\end{tabular}
+		\caption{Resumen de Estimación COCOMO}
+	\end{table}
+	
+	% -----------------------------------------------------------------------------------
+	% 5. METODOLOGÍAS ÁGILES
+	% -----------------------------------------------------------------------------------
+	\section{Metodologías Ágiles}
+	
+	El desarrollo se rige bajo el marco de trabajo **Scrum**, permitiendo entregas incrementales y adaptación a cambios.
+	
+	\subsection{Seguimiento del Desarrollo}
+	\begin{itemize}
+		\item \textbf{Sprints:} Ciclos de desarrollo de 2 semanas.
+		\item \textbf{Herramientas:} Uso de Trello/Jira para el tablero Kanban (Backlog, En Progreso, Terminado) y GitHub para el control de versiones.
+		\item \textbf{Daily Meetings:} Reuniones cortas de sincronización para identificar bloqueos.
+	\end{itemize}
+	
+	\subsection{Planificación de Sprints Iniciales}
+	\begin{itemize}
+		\item \textbf{Sprint 0:} Configuración del entorno Docker, definición de la Base de Datos PostgreSQL y diseño de arquitectura.
+		\item \textbf{Sprint 1:} Desarrollo del Backend (Spring Boot) para CRUD de Pacientes y Doctores.
+		\item \textbf{Sprint 2:} Implementación del módulo de Citas y conexión con el servicio de ML en Python.
+	\end{itemize}
+	
+	% -----------------------------------------------------------------------------------
+	% 6. DOCUMENTACIÓN ADICIONAL E INNOVACIÓN
+	% -----------------------------------------------------------------------------------
+	\section{Documentación Adicional y Funcionalidades Innovadoras}
+	
+	\subsection{Funcionalidad Innovadora: Analítica Predictiva}
+	A diferencia de los sistemas de gestión clínica tradicionales, nuestra base de datos incluye una estructura dedicada (`predicciones_salud`) alimentada por algoritmos de Machine Learning.
+	\begin{itemize}
+		\item \textbf{Predicción de Ausentismo:} Analiza la fecha de creación de la cita vs. la fecha real para predecir la probabilidad de que un paciente no asista, permitiendo a la clínica confirmar con antelación.
+		\item \textbf{Alertas de Salud:} Monitoreo de tendencias en signos vitales (presión arterial, peso) para sugerir intervenciones preventivas antes de un diagnóstico crítico.
+	\end{itemize}
+	
+	\subsection{Documentación de API}
+	Se utiliza **OpenAPI (Swagger)** para documentar automáticamente los endpoints REST generados por Spring Boot, facilitando la integración con el Frontend y aplicaciones móviles futuras.
+	
+	% -----------------------------------------------------------------------------------
+	% 7. PROTOTIPOS DEL SISTEMA
+	% -----------------------------------------------------------------------------------
+	\section{Prototipos del Sistema}
+	
+	A continuación, se presentan los prototipos funcionales de las pantallas principales del sistema.
+	
+	\subsection{Pantalla de Inicio de Sesión y Dashboard}
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.7\textwidth]{proto_login.png}
+		\fbox{\begin{minipage}{10cm}\centering\vspace{4cm} [INSERTAR PROTOTIPO LOGIN/DASHBOARD] \vspace{4cm}\end{minipage}}
+		\caption{Prototipo de Acceso y Panel Principal}
+	\end{figure}
+	
+	\subsection{Gestión de Citas y Calendario}
+	\begin{figure}[H]
+		\centering
+		% \includegraphics[width=0.7\textwidth]{proto_citas.png}
+		\fbox{\begin{minipage}{10cm}\centering\vspace{4cm} [INSERTAR PROTOTIPO CITAS] \vspace{4cm}\end{minipage}}
+		\caption{Interfaz de Programación de Citas}
+	\end{figure}
+	
+\end{document}

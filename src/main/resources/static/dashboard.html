@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediML - Dashboard Predictivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-slate-900 text-white flex flex-col shadow-2xl z-20">
+        <div class="h-20 flex items-center justify-center font-bold text-2xl border-b border-slate-800 tracking-wider">
+            <i class="fa-solid fa-heart-pulse text-rose-500 mr-3"></i> Medi<span class="text-blue-400">ML</span>
+        </div>
+        <nav class="flex-1 px-4 py-8 space-y-3">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 bg-blue-600 rounded-xl shadow-lg shadow-blue-600/20 transition-all"><i class="fa-solid fa-chart-line w-6"></i> Panel Predictivo</a>
+            <a href="registro.html" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all"><i class="fa-solid fa-user-plus w-6"></i> Nuevo Expediente</a>
+            <a href="agendar.html" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all"><i class="fa-solid fa-plus w-6"></i> Agendar Cita</a>
+            <a href="agenda.html" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all"><i class="fa-regular fa-calendar-check w-6"></i> Agenda Operativa</a>
+            <a href="historial.html" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all"><i class="fa-solid fa-folder-open w-6"></i> Historial Médico</a>
+        </nav>
+        <div class="p-6 border-t border-slate-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold" id="user-avatar">--</div>
+                <div class="text-sm">
+                    <p class="font-bold" id="user-name">Cargando...</p>
+                    <p class="text-slate-400 text-xs">Administrador</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-20 bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-10 flex items-center justify-between px-10">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">Monitor de Salud Poblacional</h1>
+                <p class="text-sm text-slate-500">Análisis predictivo basado en signos vitales e IMC</p>
+            </div>
+        </header>
+
+        <div class="p-10 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-users text-6xl text-blue-500"></i>
+                    </div>
+                    <p class="text-slate-500 text-sm font-medium mb-1">PACIENTES REGISTRADOS</p>
+                    <p class="text-4xl font-bold text-slate-800" id="stat-total-pacientes"><i class="fa-solid fa-spinner fa-spin text-xl"></i></p>
+                    <p class="text-xs text-green-500 mt-2"><i class="fa-solid fa-server"></i> Datos de BD en tiempo real</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-sm border border-rose-100 p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-droplet text-6xl text-rose-500"></i>
+                    </div>
+                    <p class="text-slate-500 text-sm font-medium mb-1">RIESGO ALTO: DIABETES</p>
+                    <p class="text-4xl font-bold text-rose-600">15%</p>
+                    <p class="text-xs text-rose-500 mt-2 font-medium"><i class="fa-solid fa-triangle-exclamation"></i> En observación</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-sm border border-orange-100 p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-heart-crack text-6xl text-orange-500"></i>
+                    </div>
+                    <p class="text-slate-500 text-sm font-medium mb-1">RIESGO: HIPERTENSIÓN</p>
+                    <p class="text-4xl font-bold text-orange-600">22%</p>
+                    <p class="text-xs text-orange-500 mt-2 font-medium"><i class="fa-solid fa-triangle-exclamation"></i> Requieren control PA</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-shield-heart text-6xl text-emerald-500"></i>
+                    </div>
+                    <p class="text-slate-500 text-sm font-medium mb-1">ÍNDICE DE SALUD GENERAL</p>
+                    <p class="text-4xl font-bold text-emerald-600">63%</p>
+                    <p class="text-xs text-emerald-500 mt-2 font-medium"><i class="fa-solid fa-check-circle"></i> Riesgo bajo o nulo</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 col-span-1">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-lg font-bold text-slate-800">Distribución de Riesgo</h2>
+                        <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-200">ML Activo</span>
+                    </div>
+                    <div class="relative h-64 w-full">
+                        <canvas id="healthRiskChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 col-span-2 overflow-hidden flex flex-col">
+                    <div class="p-6 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
+                        <h2 class="text-lg font-bold text-slate-800">Últimos Pacientes Evaluados</h2>
+                        <a href="historial.html" class="text-sm text-blue-600 font-semibold hover:text-blue-800">Ver historial <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+                    </div>
+                    <div class="overflow-x-auto flex-1 p-2">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-slate-400 text-xs uppercase tracking-wider border-b border-gray-100">
+                                    <th class="p-4 font-semibold">Paciente</th>
+                                    <th class="p-4 font-semibold">Signos Vitales</th>
+                                    <th class="p-4 font-semibold">Diagnóstico Predictivo</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm text-slate-600" id="tabla-pacientes">
+                                <tr>
+                                    <td colspan="3" class="p-8 text-center text-slate-400">
+                                        <i class="fa-solid fa-spinner fa-spin mr-2"></i> Cargando datos desde PostgreSQL...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // 1. Cargar Usuario LocalStorage
+            const loggedUser = localStorage.getItem('loggedUser');
+            if(loggedUser) {
+                document.getElementById('user-name').innerText = "Dr. " + loggedUser;
+                document.getElementById('user-avatar').innerText = loggedUser.substring(0,2).toUpperCase();
+            }
+
+            // 2. Inicializar Gráfico Vacío
+            const ctx = document.getElementById('healthRiskChart').getContext('2d');
+            let chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Riesgo Alto', 'Riesgo Medio', 'Riesgo Bajo'],
+                    datasets: [{ data: [0, 0, 0], backgroundColor: ['#f43f5e', '#f59e0b', '#10b981'], borderWidth: 0 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // 3. FETCH: Traer datos reales de Spring Boot
+            try {
+                const response = await fetch('http://localhost:8080/api/dashboard/resumen');
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Llenar tarjeta
+                    document.getElementById('stat-total-pacientes').innerText = data.totalPacientes;
+
+                    // Llenar gráfico
+                    chartInstance.data.datasets[0].data = data.grafico;
+                    chartInstance.update();
+
+                    // Llenar tabla iterando el JSON
+                    const tbody = document.getElementById('tabla-pacientes');
+                    tbody.innerHTML = ''; // Limpiar mensaje de carga
+
+                    if(data.ultimosPacientes.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="3" class="p-4 text-center text-slate-400">No hay registros aún.</td></tr>';
+                    }
+
+                    data.ultimosPacientes.forEach(p => {
+                        // Estilos condicionales según riesgo
+                        let badgeClass = 'bg-gray-100 text-gray-700';
+                        if(p.diagnostico.includes("Alto")) badgeClass = 'bg-rose-100 text-rose-700 border-rose-200';
+                        else if(p.diagnostico.includes("Hipertensión")) badgeClass = 'bg-amber-100 text-amber-700 border-amber-200';
+                        else if(p.diagnostico.includes("Saludable")) badgeClass = 'bg-emerald-100 text-emerald-700 border-emerald-200';
+
+                        tbody.innerHTML += `
+                            <tr class="border-b border-gray-50 hover:bg-slate-50 transition-colors">
+                                <td class="p-4"><p class="font-bold text-slate-800">${p.nombre}</p></td>
+                                <td class="p-4"><p class="text-xs bg-slate-100 px-2 py-1 rounded inline-block border border-slate-200">${p.signos}</p></td>
+                                <td class="p-4"><span class="${badgeClass} border py-1 px-3 rounded-md text-xs font-bold">${p.diagnostico}</span></td>
+                            </tr>
+                        `;
+                    });
+                }
+            } catch (error) {
+                console.error("Error conectando con el backend:", error);
+                document.getElementById('tabla-pacientes').innerHTML = '<tr><td colspan="3" class="p-4 text-center text-rose-500 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Error al conectar con Spring Boot</td></tr>';
+            }
+        });
+    </script>
+</body>
+</html>

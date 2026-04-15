@@ -1,0 +1,45 @@
+# ========================
+# Java / Spring Boot / Maven
+# ========================
+target/
+*.jar
+*.war
+*.ear
+*build.log
+# (Opcional) Mantener el wrapper de Maven es buena práctica para que otros no necesiten instalarlo
+!.mvn/wrapper/maven-wrapper.jar
+
+# ========================
+# Python / ML Analytics
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.env/
+# Modelos y datos (descomenta o añade según necesites)
+*.pkl
+*.h5
+*.csv
+*.parquet
+*.sqlite3
+*.db
+
+# ========================
+# Entorno / Variables Locales
+# ========================
+.env
+docker-volumes/
+
+# ========================
+# IDEs / OS
+# ========================
+.idea/
+.vscode/
+*.swp
+.DS_Store
+.classpath
+.project
+.settings/

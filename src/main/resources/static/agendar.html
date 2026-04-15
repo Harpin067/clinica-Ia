@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediML - Agendar Cita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-slate-900 text-white flex flex-col shadow-2xl z-20">
+        <div class="h-20 flex items-center justify-center font-bold text-2xl border-b border-slate-800 tracking-wider">
+            <i class="fa-solid fa-heart-pulse text-rose-500 mr-3"></i> Medi<span class="text-blue-400">ML</span>
+        </div>
+        <nav class="flex-1 px-4 py-8 space-y-3">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all"><i class="fa-solid fa-chart-line w-6"></i> Panel Predictivo</a>
+            <a href="registro.html" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all"><i class="fa-solid fa-user-plus w-6"></i> Nuevo Expediente</a>
+            <a href="agendar.html" class="flex items-center px-4 py-3 bg-blue-600 rounded-xl shadow-lg shadow-blue-600/20 transition-all"><i class="fa-solid fa-plus w-6"></i> Agendar Cita</a>
+            <a href="agenda.html" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all"><i class="fa-regular fa-calendar-check w-6"></i> Agenda Operativa</a>
+            <a href="historial.html" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition-all"><i class="fa-solid fa-folder-open w-6"></i> Historial Médico</a>
+        </nav>
+        <div class="p-6 border-t border-slate-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold" id="user-avatar">--</div>
+                <div class="text-sm">
+                    <p class="font-bold" id="user-name">Cargando...</p>
+                    <p class="text-slate-400 text-xs">Administrador</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-20 bg-white border-b border-gray-100 sticky top-0 z-10 flex items-center px-10">
+            <h1 class="text-2xl font-bold text-slate-800">Agendamiento Inteligente</h1>
+        </header>
+
+        <div class="p-10 max-w-5xl mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                    <form id="appointmentForm" class="space-y-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="col-span-2">
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Paciente (Seleccionar)</label>
+                                <select name="pacienteId" class="w-full px-4 py-2.5 bg-slate-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option value="1">Ricardo Funes (ID: 1)</option>
+                                    <option value="2">Sofía Vergara (ID: 2)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Fecha y Hora de la Cita</label>
+                                <input type="datetime-local" name="fechaHoraCita" class="w-full px-4 py-2.5 bg-slate-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Especialidad</label>
+                                <select name="especialidad" class="w-full px-4 py-2.5 bg-slate-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option value="general">Consulta General</option>
+                                    <option value="cardiologia">Cardiología</option>
+                                </select>
+                            </div>
+                            <div class="col-span-2">
+                                <p class="text-sm font-semibold text-slate-700 mb-3">Factores Predictivos (No-Show Model)</p>
+                                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-dashed border-gray-300">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="smsRecibido" value="true" class="w-4 h-4 text-blue-600 rounded">
+                                        <span class="text-sm text-slate-600">¿Recibió SMS recordatorio?</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="becaSocial" value="true" class="w-4 h-4 text-blue-600 rounded">
+                                        <span class="text-sm text-slate-600">¿Aplica Beca Social (Scholarship)?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <button type="button" onclick="window.location.href='agenda.html'" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-all">
+                                Evaluar Riesgo y Guardar Cita
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="bg-slate-800 p-6 rounded-2xl text-white shadow-xl">
+                        <h3 class="text-lg font-bold mb-4"><i class="fa-solid fa-robot text-blue-400 mr-2"></i> ML Output</h3>
+                        <div id="ml-result" class="space-y-2">
+                            <span class="text-sm text-slate-400">Riesgo de Ausentismo (No-Show)</span>
+                            <p class="text-3xl font-bold text-emerald-400">Evaluando...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedUser = localStorage.getItem('loggedUser');
+            if(loggedUser) {
+                document.getElementById('user-name').innerText = "Dr. " + loggedUser;
+                document.getElementById('user-avatar').innerText = loggedUser.substring(0,2).toUpperCase();
+            }
+        });
+    </script>
+</body>
+</html>
